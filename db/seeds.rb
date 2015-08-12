@@ -10,3 +10,28 @@ user = User.find_or_create_by(email: "s.giles@hotmail.co.uk")
 user.password = '12345678'
 user.password_confirmation = '12345678'
 user.save!
+
+user = User.find_or_create_by(email: "emmajohnston16@hotmail.com")
+user.password = '12345678'
+user.password_confirmation = '12345678'
+user.save!
+
+user = User.find_or_create_by(email: "davey_j_giles@hotmail.com")
+user.password = '12345678'
+user.password_confirmation = '12345678'
+user.save!
+
+user = User.find_or_create_by(email: "giles.clan@btinternet.com")
+user.password = '12345678'
+user.password_confirmation = '12345678'
+user.save!
+
+user = User.find_or_create_by(email: "carolanngiles@me.com")
+user.password = '12345678'
+user.password_confirmation = '12345678'
+user.save!
+
+user = User.find_or_create_by(email: "faye.cooper@hanover.org.uk")
+user.password = '12345678'
+user.password_confirmation = '12345678'
+user.save!
