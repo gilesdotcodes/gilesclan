@@ -15,6 +15,10 @@
  *= require_self
  */
 
+* {
+  font-size: 16px;
+}
+
 .set-width {
   width: 300px;
 }

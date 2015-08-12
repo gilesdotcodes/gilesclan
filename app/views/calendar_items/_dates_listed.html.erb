@@ -12,7 +12,7 @@
     <tbody>
       <% dates.each do |date| %>
         <tr>
-          <td><%= date.date_of_event %></td>
+          <td><%= date.date_of_event.strftime("%a %e %b %Y") %></td>
           <td><%= date.time_of_event.strftime("%H:%M") %></td>
           <td><%= date.name %></td>
           <td><%= date.location %></td>
