@@ -1,0 +1,26 @@
+<% if dates %>
+  <table class="table table-hover table-condensed">
+    <thead>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th class="set-width">Notes</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <% dates.each do |date| %>
+        <tr>
+          <td><%= date.date_of_event %></td>
+          <td><%= date.time_of_event.strftime("%H:%M") %></td>
+          <td><%= date.name %></td>
+          <td><%= date.location %></td>
+          <td><%= date.note %></td>
+          <td><%= link_to("Click", edit_calendar_item_path(date)) %></td>
+          <td><%= link_to("Click", date, confirm: "Are you sure?", method: :delete) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
