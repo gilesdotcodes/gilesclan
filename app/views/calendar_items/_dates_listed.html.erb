@@ -18,7 +18,7 @@
           <td><%= date.location %></td>
           <td><%= date.note %></td>
           <td><%= link_to("Click", edit_calendar_item_path(date)) %></td>
-          <td><%= link_to("Click", date, confirm: "Are you sure?", method: :delete) %></td>
+          <td><%= link_to("Click", date, method: :delete, data: { confirm: "Are you sure?" }) %></td>
         </tr>
       <% end %>
     </tbody>
