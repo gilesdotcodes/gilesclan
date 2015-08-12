@@ -5,32 +5,11 @@
     <div class="panel-info col-xs-8">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4>Create New Fixture</h4>
+          <h4>Create New Event</h4>
         </div>
         <div class="panel-body">
           <%= form_for @date, url: calendar_items_path, method: :post do |f| %>
-            <div class="form-group">
-              <%= f.label :date_of_event %>
-              <%= f.date_field :date_of_event, class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.label :time_of_event %>
-              <%= f.time_field :time_of_event, class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.label :name %>
-              <%= f.text_field :name, class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.label :location %>
-              <%= f.text_field :location, class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.label :note %>
-              <%= f.text_area :note, rows: 4, class: "form-control" %>
-            </div>
-
-            <%= f.submit class: "btn btn-primary" %>
+            <%= render 'calendar_items/form', f: f %>
           <% end %>
         </div>
       </div>

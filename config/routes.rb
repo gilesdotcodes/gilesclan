@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
   resources :calendar_items
-  get 'west_ham_dates', to: 'calendar_items#west_ham_index', as: 'west_ham_dates'
-  get 'portugal_dates', to: 'calendar_items#portugal_index', as: 'portugal_dates'
+  get 'west_ham_dates', to: 'calendar_items#west_ham_index', as: 'west_ham_items'
+  get 'portugal_dates', to: 'calendar_items#portugal_index', as: 'portugal_items'
+  get 'england_dates', to: 'calendar_items#england_index', as:'england_items'
 
   root 'base#index'
   # Example of regular route:

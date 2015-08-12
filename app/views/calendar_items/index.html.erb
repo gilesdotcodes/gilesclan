@@ -1,1 +1,17 @@
-<p>Eventually a basic list of Calendar Events will be listed here.</p>
+<div class="row">
+  <div class="panel-body">
+    <div class="panel-info col-xs-1">
+    </div>
+    <div class="panel-info col-xs-10">
+      <p>(Currently shows all Calendar Events but I could remove certain types)</p>
+      <div class="panel panel-default table-responsive">
+        <div class="panel-heading">
+          <h4>Giles Family Calendar <%= link_to("Add Event", new_calendar_item_path, class: "pull-right") %></h4>
+        </div>
+        <%= render 'calendar_items/dates_listed', dates: @dates %>
+      </div>
+    </div>
+    <div class="panel-info col-xs-1">
+    </div>
+  </div>
+</div>
