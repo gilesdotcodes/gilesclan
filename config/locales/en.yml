@@ -28,4 +28,11 @@ en:
         portugal: "Portugal"
         birthday: "Birthday"
         other: "Other"
-
+  mailer:
+    default_email_from: "no-reply@gilesclan.me.uk"
+  date:
+    formats:
+      default: "%a %e %b %Y"
+  time:
+    formats:
+      default: "%H:%M"

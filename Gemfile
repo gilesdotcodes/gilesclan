@@ -38,6 +38,10 @@ gem 'devise-bootstrap-views'
 gem 'devise'
 gem 'rails_12factor'
 
+group :development do
+  gem 'letter_opener', '~> 1.4.1'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

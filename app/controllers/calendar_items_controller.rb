@@ -29,6 +29,7 @@ class CalendarItemsController < ApplicationController
   def create
     @date = CalendarItem.new(item_params)
     @date.update(event_type: session[:event_type]) unless session[:event_type] == 'calendar'
+    @date.update(user: current_user)
     if @date.save
       redirect_to send("#{session[:event_type]}_items_path")
     else
