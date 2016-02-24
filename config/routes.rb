@@ -14,7 +14,16 @@ Rails.application.routes.draw do
   get 'portugal_dates', to: 'calendar_items#portugal_index', as: 'portugal_items'
   get 'england_dates', to: 'calendar_items#england_index', as:'england_items'
 
+  scope '/biography' do
+    get 'home', to: 'biography_events#home', as: 'biography_home'
+    resources :biography_events, path: 'events'
+    resources :person_tags
+    resources :type_tags
+  end
+
   root 'base#index'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

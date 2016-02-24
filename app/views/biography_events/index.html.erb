@@ -1,0 +1,31 @@
+<h4>Select Filters</h4>
+<p><em>Uncheck all options to see all Events.</em></p>
+<div class="row">
+  <%= form_tag({ url: biography_events_path}, { method: :get }) do %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :person_tags %><br/>
+        <%= collection_check_boxes(:filters, :person_tag_ids, PersonTag.all, :id, :name) %>
+      </div>
+      <div class="form-group">
+        <%= submit_tag 'Search' %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :type_tags %><br/>
+        <%= collection_check_boxes(:filters, :type_tag_ids, TypeTag.all, :id, :name) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<h4>Events</h4>
+<% if @biography_events.any? %>
+  <% @biography_events.each do |event| %>
+    <ul>
+      <li><%= event.date_output %> - <%= link_to("#{event.title}", biography_event_path(event.id))%></li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>No Events match your search criteria.</p>
+<% end %>

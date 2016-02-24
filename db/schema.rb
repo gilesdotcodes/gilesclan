@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811225705) do
+ActiveRecord::Schema.define(version: 20160222221741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "biography_events", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "title"
+    t.text     "description"
+    t.string   "location"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "biography_events", ["user_id"], name: "index_biography_events_on_user_id", using: :btree
+
+  create_table "biography_events_person_tags", force: :cascade do |t|
+    t.integer "biography_event_id"
+    t.integer "person_tag_id"
+  end
+
+  create_table "biography_events_type_tags", force: :cascade do |t|
+    t.integer "biography_event_id"
+    t.integer "type_tag_id"
+  end
 
   create_table "calendar_items", force: :cascade do |t|
     t.date     "date_of_event"
@@ -29,6 +52,14 @@ ActiveRecord::Schema.define(version: 20150811225705) do
   end
 
   add_index "calendar_items", ["user_id"], name: "index_calendar_items_on_user_id", using: :btree
+
+  create_table "person_tags", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "type_tags", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
