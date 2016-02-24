@@ -23,6 +23,7 @@ class BiographyEventsController < ApplicationController
 
   def create
     @biography_event = BiographyEvent.new(biography_events_params)
+    @biography_event.user = current_user
     if @biography_event.save
       flash[:notice] = "Event successfully saved!"
       redirect_to biography_home_path
