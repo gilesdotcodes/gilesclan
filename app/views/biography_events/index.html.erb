@@ -19,7 +19,11 @@
     </div>
   <% end %>
 </div>
-<h4>Events</h4>
+<% if @tags.any? %>
+  <h4>Events tagged with: <%= @tags.each{ |t| "[#{t.name}] " }%></h4>
+<% else %>
+  <h4>All Events</h4>
+<% end %>
 <% if @biography_events.any? %>
   <% @biography_events.each do |event| %>
     <ul>

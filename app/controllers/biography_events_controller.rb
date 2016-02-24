@@ -12,6 +12,9 @@ class BiographyEventsController < ApplicationController
     scope = scope.types(@params[:type_tag_ids].map(&:to_i)) if @params[:type_tag_ids].present?
     scope = scope.persons(@params[:person_tag_ids].map(&:to_i)) if @params[:person_tag_ids].present?
     @biography_events = scope.uniq
+    @tags = []
+    @tags << @params[:type_tag_ids].map{ |t| TypeTag.find(t.to_i) } if @params[:type_tag_ids].present?
+    @tags << @params[:person_tag_ids].map{ |t| PersonTag.find(t.to_i) } if @params[:type_tag_ids].present?
   end
 
   def show
