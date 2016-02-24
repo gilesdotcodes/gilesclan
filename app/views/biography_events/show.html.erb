@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-3">
+    <p>Date(s):</p>
+    <p><strong><%= @biography_event.date_output %></strong></p>
+    <p>Location:</p>
+    <p><strong><%= @biography_event.location %></strong></p>
+    <% if @biography_event.person_tags.any? %>
+      <p>Persons Present:</p>
+      <ul>
+        <% @biography_event.person_tags.each do |person| %>
+          <li><strong><%= person.name %></strong></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if @biography_event.type_tags.any? %>
+      <p>Type Tags:</p>
+      <ul>
+        <% @biography_event.type_tags.each do |type| %>
+          <li><strong><%= type.name %></strong></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="col-md-9">
+    <h3><%= @biography_event.title %> <%= link_to('Edit', edit_biography_event_path(@biography_event)) %></h3>
+    <p><%= @biography_event.description %></p>
+    <p><em>Added by: <%= @biography_event.user.email %></em></p>
+  </div>
+</div>
