@@ -20,7 +20,12 @@
   <% end %>
 </div>
 <% if @tags.any? %>
-  <h4>Events tagged with: <%= @tags.each{ |t| "[#{t.name}] " }%></h4>
+  <h4>Events tagged with:
+  <% @tags.each_with_index do |tag, i| %>
+    <%= "[#{tag.name}]" %>
+    <%= "," unless i+1 == @tags.count %>
+  <% end %>
+  </h4>
 <% else %>
   <h4>All Events</h4>
 <% end %>
