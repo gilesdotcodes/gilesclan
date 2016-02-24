@@ -8,13 +8,8 @@ class BiographyEventsController < ApplicationController
 
   def index
     check_params(params)
-    scope = BiographyEvent.all.latest_first
-    scope = scope.types(@params[:type_tag_ids].map(&:to_i)) if @params[:type_tag_ids].present?
-    scope = scope.persons(@params[:person_tag_ids].map(&:to_i)) if @params[:person_tag_ids].present?
-    @biography_events = scope.uniq
-    @tags = []
-    @params[:type_tag_ids].each{ |t| @tags << TypeTag.find(t.to_i) } if @params[:type_tag_ids].present?
-    @params[:person_tag_ids].each{ |t| @tags << PersonTag.find(t.to_i) } if @params[:person_tag_ids].present?
+    search_params(@params)
+    tags_params(@params)
   end
 
   def show
@@ -75,6 +70,32 @@ class BiographyEventsController < ApplicationController
     @params = params[:filters].present? ? params[:filters] : params
     @params[:type_tag_ids].reject!(&:blank?) if @params[:type_tag_ids].present?
     @params[:person_tag_ids].reject!(&:blank?) if @params[:person_tag_ids].present?
+  end
+
+  def search_params(params)
+    scope = BiographyEvent.all.latest_first
+    new_scope = scope
+    if params[:type_tag_ids].present?
+      params[:type_tag_ids].each do |id|
+        new_scope = new_scope & scope.by_type(id.to_i)
+      end
+    end
+    if params[:person_tag_ids].present?
+      params[:person_tag_ids].each do |id|
+        new_scope = new_scope & scope.by_person(id.to_i)
+      end
+    end
+    if params[:year].present?
+      new_scope = new_scope & scope.by_year(params[:year].to_i)
+    end
+    @biography_events = new_scope.uniq
+  end
+
+  def tags_params(params)
+    @tags = []
+    params[:type_tag_ids].each{ |t| @tags << TypeTag.find(t.to_i).name } if params[:type_tag_ids].present?
+    params[:person_tag_ids].each{ |t| @tags << PersonTag.find(t.to_i).name } if params[:person_tag_ids].present?
+    @tags << params[:year] if params[:year].present?
   end
 
 end

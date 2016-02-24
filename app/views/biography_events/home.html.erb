@@ -28,7 +28,7 @@
             <li><%= link_to("#{person.name}", biography_events_path(person_tag_ids: [person.id])) %></li>
           <% end %>
         </ul>
-        <p><%= link_to('Add another Person for tagging to Events.', new_person_tag_path) %></p>
+        <p><%= link_to('Add another Person for tagging Events', new_person_tag_path) %></p>
       </div>
 
       <div class="col-md-5">
@@ -38,7 +38,7 @@
             <li><%= link_to("#{type.name}", biography_events_path(type_tag_ids: [type.id])) %></li>
           <% end %>
         </ul>
-        <p><%= link_to('Add another Type for tagging to Events.', new_type_tag_path) %></p>
+        <p><%= link_to('Add another Type for tagging Events', new_type_tag_path) %></p>
       </div>
     </div>
 </div>
