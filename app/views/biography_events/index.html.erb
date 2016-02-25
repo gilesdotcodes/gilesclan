@@ -41,9 +41,10 @@
             <%= "[#{tag}]" %>
             <%= "&" unless i+1 == @tags.count %>
           <% end %>
+          <%= link_to('Add Event', new_biography_event_path, class: "pull-right") %>
           </h4>
         <% else %>
-          <h4>All Events</h4>
+          <h4>All Events <%= link_to('Add Event', new_biography_event_path, class: "pull-right") %></h4>
         <% end %>
       </div>
       <div class="panel-body">
