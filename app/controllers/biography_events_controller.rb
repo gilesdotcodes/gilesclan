@@ -3,7 +3,7 @@ class BiographyEventsController < ApplicationController
   before_action :fetch_event, only: [:show, :edit, :update, :destroy]
 
   def home
-    @events_this_month = BiographyEvent.this_month.latest_first
+    @events_this_month = BiographyEvent.this_month.shuffle.take(5).sort_by(&:start_date).reverse
   end
 
   def index
