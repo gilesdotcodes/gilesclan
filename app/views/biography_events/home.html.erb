@@ -21,23 +21,44 @@
     <div class="row">
       <h4>Click on a Tag to see all linked Events</h4>
       <p><em><%= link_to('Click here', biography_events_path) %> to create more complex searches</em></p>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <h4>Person Tags</h4>
-        <ul>
-          <% PersonTag.all.each do |person| %>
-            <li><%= link_to("#{person.name}", biography_events_path(person_tag_ids: [person.id])) %></li>
+          <% PersonTag.all.in_groups_of(2) do |person_one, person_two| %>
+            <div class="row">
+              <div class="col-md-6">
+                <p><%= link_to("#{person_one.name}", biography_events_path(person_tag_ids: [person_one.id])) %></p>
+              </div>
+              <% if person_two %>
+                <div class="col-md-6">
+                  <p><%= link_to("#{person_two.name}", biography_events_path(person_tag_ids: [person_two.id])) %></p>
+                </div>
+              <% end %>
+            </div>
           <% end %>
-        </ul>
-        <p><%= link_to('Add another Person for tagging Events', new_person_tag_path) %></p>
-      </div>
+          <br/>
+          <p><%= link_to('Add another Person for tagging Events', new_person_tag_path) %></p>
+        </div>
 
-      <div class="col-md-5">
+      <div class="col-md-6">
         <h4>Type Tags</h4>
-        <ul>
-          <% TypeTag.all.each do |type| %>
-            <li><%= link_to("#{type.name}", biography_events_path(type_tag_ids: [type.id])) %></li>
+          <% TypeTag.all.in_groups_of(3) do |type_one, type_two, type_three| %>
+            <div class="row">
+              <div class="col-md-4">
+                <p><%= link_to("#{type_one.name}", biography_events_path(type_tag_ids: [type_one.id])) %></p>
+              </div>
+              <% if type_two %>
+                <div class="col-md-4">
+                  <p><%= link_to("#{type_two.name}", biography_events_path(type_tag_ids: [type_two.id])) %></p>
+                </div>
+              <% end %>
+              <% if type_three %>
+                <div class="col-md-4">
+                  <p><%= link_to("#{type_three.name}", biography_events_path(type_tag_ids: [type_three.id])) %></p>
+                </div>
+              <% end %>
+            </div>
           <% end %>
-        </ul>
+        <br/>
         <p><%= link_to('Add another Type for tagging Events', new_type_tag_path) %></p>
       </div>
     </div>

@@ -9,7 +9,9 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= label_tag :person_tags %><br/>
-        <%= collection_check_boxes(:filters, :person_tag_ids, PersonTag.all, :id, :name) %>
+        <%= collection_check_boxes(:filters, :person_tag_ids, PersonTag.all, :id, :name) do |b| %>
+          <%= b.label(class: "check_box") { b.check_box(class: "check_box") + b.text} %>
+        <% end %>
       </div>
       <div class="form-group">
         <%= submit_tag 'Search' %>
@@ -18,13 +20,15 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= label_tag :type_tags %><br/>
-        <%= collection_check_boxes(:filters, :type_tag_ids, TypeTag.all, :id, :name) %>
+        <%= collection_check_boxes(:filters, :type_tag_ids, TypeTag.all, :id, :name) do |b| %>
+          <%= b.label(class: "check_box") { b.check_box(class: "check_box") + b.text} %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <%= label_tag :years %><br/>
-        <%= collection_radio_buttons(:filters, :year, BiographyEvent.years, :to_i, :to_s) %>
+        <%= collection_select(:filters, :year, BiographyEvent.years, :to_i, :to_s, { include_blank: true }) %>
       </div>
     </div>
   <% end %>
