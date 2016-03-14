@@ -8,7 +8,11 @@
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3>5 random events from this month in Giles Clan History:</h3>
+            <% if @all %>
+              <h3>Events from this month in Giles Clan History:</h3>
+            <% else %>
+              <h3>5 random events from this month in Giles Clan History:</h3>
+            <% end %>
           </div>
           <div class="panel-body">
             <ul>
@@ -16,6 +20,11 @@
                 <li><%= event.date_output %> - <%= link_to("#{event.title}", biography_event_path(event.id))%></li>
               <% end %>
             </ul>
+            <% if @all %>
+              <p><%= link_to('Show me 5 random events from this month', biography_home_path(all: 0)) %></p>
+            <% else %>
+              <p><%= link_to('View All from this month', biography_home_path(all: 1)) %></p>
+            <% end %>
           </div>
         </div>
       </div>
