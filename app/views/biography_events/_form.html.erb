@@ -29,13 +29,17 @@
     <div class="col-md-6">
       <div class="form-group">
         <%= f.label :person_tags %><br/>
-        <%= f.collection_check_boxes(:person_tag_ids, PersonTag.all, :id, :name) %>
+        <%= f.collection_check_boxes(:person_tag_ids, PersonTag.all, :id, :name) do |b| %>
+          <%= b.label(class: "check_box") { b.check_box(class: "check_box") + b.text} %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <%= f.label :type_tags %><br/>
-        <%= f.collection_check_boxes(:type_tag_ids, TypeTag.all, :id, :name) %>
+        <%= f.collection_check_boxes(:type_tag_ids, TypeTag.all, :id, :name) do |b| %>
+          <%= b.label(class: "check_box") { b.check_box(class: "check_box") + b.text} %>
+        <% end %>
       </div>
     </div>
   </div>
