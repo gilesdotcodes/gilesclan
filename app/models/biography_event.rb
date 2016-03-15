@@ -7,6 +7,7 @@ class BiographyEvent < ActiveRecord::Base
 
   scope :latest_first, -> { order('start_date DESC') }
   scope :this_month, -> { where("DATE_PART('month', start_date) = ?", Time.zone.now.month) }
+  scope :on_this_day, -> { where("DATE_PART('month', start_date) = ? AND DATE_PART('day', start_date) = ?", Time.zone.now.month, Time.zone.now.day) }
   scope :by_year, ->(year) { where("DATE_PART('year', start_date) = ?", year) }
   scope :by_type, ->(id) { joins(:type_tags).where('type_tags.id = ?', id) }
   scope :by_person, ->(id) { joins(:person_tags).where('person_tags.id = ?', id) }
@@ -24,6 +25,18 @@ class BiographyEvent < ActiveRecord::Base
       years << be.start_date.year
     end
     years.uniq
+  end
+
+  def self.send_random_notification
+    offset = rand(BiographyEvent.count)
+    event = BiographyEvent.offset(offset).first
+    Notifications.random_biography_event_mailer(event).deliver
+  end
+
+  def self.send_daily_notification
+    event = BiographyEvent.on_this_day.shuffle.first
+    return false if event.nil?
+    Notifications.daily_biography_event_mailer(event).deliver
   end
 
 end

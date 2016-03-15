@@ -1,6 +1,7 @@
 class BiographyEventsController < ApplicationController
 
   before_action :fetch_event, only: [:show, :edit, :update, :destroy]
+  before_action :get_referrer, only: [:new]
 
   def home
     @all = params[:all].to_i == 1 ? true : false
@@ -29,7 +30,11 @@ class BiographyEventsController < ApplicationController
     @biography_event.user = current_user
     if @biography_event.save
       flash[:notice] = "Event successfully saved!"
-      redirect_to biography_home_path
+      if session[:come_from] == 'index'
+        redirect_to biography_events_path
+      else
+        redirect_to biography_home_path
+      end
     else
       flash[:notice] = "There's an error!"
       render action: :new
@@ -52,6 +57,24 @@ class BiographyEventsController < ApplicationController
   def destroy
     if @biography_event.destroy
       flash[:notice] = "Event successfully deleted!"
+    else
+      flash[:notice] = "There's an error!"
+    end
+    redirect_to biography_home_path
+  end
+
+  def random
+    if BiographyEvent.send_random_notification
+      flash[:notice] = "Random Email Sent!"
+    else
+      flash[:notice] = "There's an error!"
+    end
+    redirect_to biography_home_path
+  end
+
+  def daily
+    if BiographyEvent.send_daily_notification
+      flash[:notice] = "On This Day Email Sent!"
     else
       flash[:notice] = "There's an error!"
     end
@@ -101,6 +124,10 @@ class BiographyEventsController < ApplicationController
     params[:type_tag_ids].each{ |t| @tags << TypeTag.find(t.to_i).name } if params[:type_tag_ids].present?
     params[:person_tag_ids].each{ |t| @tags << PersonTag.find(t.to_i).name } if params[:person_tag_ids].present?
     @tags << params[:year] if params[:year].present?
+  end
+
+  def get_referrer
+    session[:come_from] = Rails.application.routes.recognize_path(request.referrer)[:action]
   end
 
 end

@@ -2,6 +2,12 @@
   <div class="col-md-2">
     <p><%= link_to('Add Event', new_biography_event_path) %></p>
     <p><%= link_to('View/Search Events', biography_events_path) %></p>
+    <% if current_user.id == 1 %>
+      <p><%= button_to('Random Notification', random_path) %></p>
+      <% if BiographyEvent.on_this_day.any? %>
+        <p><%= button_to('On This Day Notification', daily_path) %></p>
+      <% end %>
+    <% end %>
   </div>
   <div class="col-md-10">
     <div class="row">

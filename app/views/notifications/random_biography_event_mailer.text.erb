@@ -1,0 +1,8 @@
+<%= @event.title %>
+<%= l @event.start_date.to_date %>
+<%= @event.location %>
+<%= @event.description %>
+Clan Members present:
+<% @event.person_tags.each do |person| %>
+  <%= person.name %>
+<% end %>
