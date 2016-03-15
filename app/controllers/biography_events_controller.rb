@@ -1,7 +1,7 @@
 class BiographyEventsController < ApplicationController
 
   before_action :fetch_event, only: [:show, :edit, :update, :destroy]
-  before_action :get_referrer, only: [:new]
+  before_action :get_referrer, only: [:new, :show]
 
   def home
     @all = params[:all].to_i == 1 ? true : false
@@ -47,7 +47,11 @@ class BiographyEventsController < ApplicationController
   def update
     if @biography_event.update(biography_events_params)
       flash[:notice] = "Event successfully edited and saved!"
-      redirect_to biography_home_path
+      if session[:come_from] == 'index'
+        redirect_to biography_events_path
+      else
+        redirect_to biography_home_path
+      end
     else
       flash[:notice] = "There's an error!"
       render action: :edit
