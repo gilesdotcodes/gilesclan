@@ -7,5 +7,7 @@
   <% @event.person_tags.each do |person| %>
     <%= person.name %>
   <% end %>
+<% else %>
+  No Clan Members tagged to this event.
 <% end %>
 View and/or Edit this event: <%= biography_event_url(@event.id) %>

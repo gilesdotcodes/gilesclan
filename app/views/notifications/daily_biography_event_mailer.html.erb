@@ -9,5 +9,7 @@
       <li><strong><%= person.name %></strong></li>
     <% end %>
   </ul>
+<% else %>
+  <p>No Clan Members tagged to this event.</p>
 <% end %>
 <p><%= link_to('View and/or Edit this event', biography_event_url(@event.id), { target: '_blank' })%></p>
