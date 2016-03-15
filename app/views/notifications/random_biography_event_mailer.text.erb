@@ -2,8 +2,10 @@
 <%= l @event.start_date.to_date %>
 <%= @event.location %>
 <%= @event.description %>
-Clan Members present:
-<% @event.person_tags.each do |person| %>
-  <%= person.name %>
+<% if @event.person_tags.any? %>
+  Clan Members present:
+  <% @event.person_tags.each do |person| %>
+    <%= person.name %>
+  <% end %>
 <% end %>
 View and/or Edit this event: <%= biography_event_url(@event.id) %>

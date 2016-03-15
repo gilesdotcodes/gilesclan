@@ -2,10 +2,12 @@
 <p><%= l @event.start_date.to_date %></p>
 <p><%= @event.location %></p>
 <p><%= @event.description %></p>
-<p>Clan Members present:</p>
-<ul>
-  <% @event.person_tags.each do |person| %>
-    <li><strong><%= person.name %></strong></li>
-  <% end %>
-</ul>
-<p><%= link_to('View and/or Edit this event', biography_event_url(@event.id))%></p>
+<% if @event.person_tags.any? %>
+  <p>Clan Members present:</p>
+  <ul>
+    <% @event.person_tags.each do |person| %>
+      <li><strong><%= person.name %></strong></li>
+    <% end %>
+  </ul>
+<% end %>
+<p><%= link_to('View and/or Edit this event', biography_event_url(@event.id), { target: '_blank' })%></p>
