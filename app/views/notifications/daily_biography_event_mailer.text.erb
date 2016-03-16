@@ -1,6 +1,9 @@
 <%= @event.title %>
 <%= l @event.start_date.to_date %>
 <%= @event.location %>
+<% if @event.type_tags.any? %>
+  <%= @event.types_to_s %>
+<% end %>
 <%= @event.description %>
 <% if @event.person_tags.any? %>
   Clan Members present:

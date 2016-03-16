@@ -39,4 +39,15 @@ class BiographyEvent < ActiveRecord::Base
     Notifications.daily_biography_event_mailer(event).deliver
   end
 
+  def types_to_s
+    return if type_tags.empty?
+    count = type_tags.size
+    str = ''
+    type_tags.each_with_index do |type, i|
+      str << type.name
+      str << ', ' unless i+1 == count
+    end
+    str
+  end
+
 end
