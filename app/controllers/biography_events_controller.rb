@@ -1,4 +1,8 @@
+require 'giles_clan_ids'
+
 class BiographyEventsController < ApplicationController
+
+  include GilesClanIds
 
   before_action :fetch_event, only: [:show, :edit, :update, :destroy]
   before_action :get_referrer, only: [:new, :show]
@@ -129,16 +133,6 @@ class BiographyEventsController < ApplicationController
 
   def get_referrer
     session[:come_from] = Rails.application.routes.recognize_path(request.referrer)[:action]
-  end
-
-  def get_giles_clan_ids(event)
-    return nil if event.person_tags.empty?
-    ids = []
-    event.person_tags.each do |person|
-      user = User.find_by(first_name: person.name)
-      ids << user.id unless user.nil?
-    end
-    ids
   end
 
 end

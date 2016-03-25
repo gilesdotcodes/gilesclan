@@ -2,15 +2,18 @@
 <%= l @event.start_date.to_date %>
 <%= @event.location %>
 <% if @event.type_tags.any? %>
-  <%= @event.types_to_s %>
+<%= @event.types_to_s %>
 <% end %>
+
 <%= @event.description %>
+
 <% if @event.person_tags.any? %>
-  Clan Members present:
-  <% @event.person_tags.each do |person| %>
-    <%= person.name %>
-  <% end %>
-<% else %>
-  No Clan Members tagged to this event.
+People present:
+<% @event.person_tags.each do |person| %>
+  <%= person.name %>
 <% end %>
+<% else %>
+  No one tagged to this event.
+<% end %>
+
 View and/or Edit this event: <%= biography_event_url(@event.id) %>

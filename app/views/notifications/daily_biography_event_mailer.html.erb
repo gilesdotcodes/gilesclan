@@ -1,18 +1,1 @@
-<h1><%= @event.title %></h1>
-<p><%= l @event.start_date.to_date %></p>
-<p><%= @event.location %></p>
-<% if @event.type_tags.any? %>
-  <p><em><%= @event.types_to_s %></em></p>
-<% end %>
-<p><%= @event.description %></p>
-<% if @event.person_tags.any? %>
-  <p>Clan Members present:</p>
-  <ul>
-    <% @event.person_tags.each do |person| %>
-      <li><strong><%= person.name %></strong></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No Clan Members tagged to this event.</p>
-<% end %>
-<p><%= link_to('View and/or Edit this event', biography_event_url(@event.id), { target: '_blank' })%></p>
+<%= render 'styled_mailer' %>

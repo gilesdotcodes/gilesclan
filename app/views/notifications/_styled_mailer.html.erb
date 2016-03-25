@@ -1,0 +1,28 @@
+<h1 style="color: #d9230f;"><%= @event.title %></h1>
+<p><%= l @event.start_date.to_date %></p>
+<p><%= @event.location %></p>
+<% if @event.type_tags.any? %>
+  <p><em><%= @event.types_to_s %></em></p>
+<% end %>
+<% if !@event.description.blank? %>
+  <p style="border: 1px solid black; padding: 15px; background-color: #f2f2f2;"><%= @event.description %></p>
+<% else %>
+  <p style="border: 1px solid black; padding: 15px; background-color: #f2f2f2;">No description added yet.</p>
+<% end %>
+<p><%= link_to('View and/or Edit this event', biography_event_url(@event.id), { target: '_blank' })%></p>
+<hr/>
+<% if @giles_clan_ids %>
+  <% @giles_clan_ids.each do |id| %>
+    <%= image_tag "avatar_#{id}", style: 'border-radius: 50%;' %>
+  <% end %>
+<% else %>
+  <p>No Clan Members tagged to this event.</p>
+<% end %>
+<% if @event.person_tags.outside_of_clan.any? %>
+  <p>Also present:</p>
+  <ul style="list-style-type: none;">
+    <% @event.person_tags.outside_of_clan.each do |person| %>
+      <li><%= person.name %></li>
+    <% end %>
+  </ul>
+<% end %>
