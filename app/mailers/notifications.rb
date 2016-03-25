@@ -15,8 +15,7 @@ class Notifications < ApplicationMailer
     @event = event
     @giles_clan_ids = get_giles_clan_ids(@event)
     mail(
-      # to: User.where('id IN (?)',(1..6)).pluck(:email),
-      to: 's.giles@hotmail.co.uk',
+      to: User.where('id IN (?)',(1..6)).pluck(:email),
       subject: "Giles Clan: A Random Memory from #{@event.start_date.year}"
     )
   end

@@ -1,7 +1,7 @@
 class PersonTag < ActiveRecord::Base
 
   scope :outside_of_clan, ->  { where('name NOT IN (?)',
-                                ['Stephen', 'Adrain', 'Carol', 'David',
+                                ['Stephen', 'Adrian', 'Carol', 'David',
                                   'Emma', 'Faye', 'James', 'Arthur'])
                               }
 
