@@ -19,6 +19,7 @@ class BiographyEventsController < ApplicationController
   end
 
   def show
+    @giles_clan_ids = get_giles_clan_ids(@biography_event)
   end
 
   def new
@@ -47,11 +48,7 @@ class BiographyEventsController < ApplicationController
   def update
     if @biography_event.update(biography_events_params)
       flash[:notice] = "Event successfully edited and saved!"
-      if session[:come_from] == 'index'
-        redirect_to biography_events_path
-      else
-        redirect_to biography_home_path
-      end
+      redirect_to biography_event_path(@biography_event)
     else
       flash[:notice] = "There's an error!"
       render action: :edit
@@ -132,6 +129,16 @@ class BiographyEventsController < ApplicationController
 
   def get_referrer
     session[:come_from] = Rails.application.routes.recognize_path(request.referrer)[:action]
+  end
+
+  def get_giles_clan_ids(event)
+    return nil if event.person_tags.empty?
+    ids = []
+    event.person_tags.each do |person|
+      user = User.find_by(first_name: person.name)
+      ids << user.id unless user.nil?
+    end
+    ids
   end
 
 end

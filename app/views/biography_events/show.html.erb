@@ -24,6 +24,12 @@
   <div class="col-md-9">
     <h3><%= @biography_event.title %> <%= link_to('Edit', edit_biography_event_path(@biography_event)) %></h3>
     <p><%= @biography_event.description %></p>
-    <p><em>Added by: <%= @biography_event.user.email %></em></p>
+    <p><em>Added by: <%= @biography_event.user.first_name %></em></p>
+    <hr>
+    <% if @giles_clan_ids %>
+      <% @giles_clan_ids.each do |id| %>
+        <%= image_tag "avatar_#{id}", class: 'avatar' %>
+      <% end %>
+    <% end %>
   </div>
 </div>

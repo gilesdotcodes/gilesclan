@@ -26,3 +26,7 @@
 .check_box {
   padding-right: 5px;
 }
+
+.avatar {
+  border-radius: 50%;
+}
