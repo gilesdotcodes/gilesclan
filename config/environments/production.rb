@@ -64,6 +64,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: ENV['ACTION_MAILER_HOST'] }
+  config.action_mailer.asset_host = 'http://www.gilesclan.me.uk'
 
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
