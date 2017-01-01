@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get 'home', to: 'biography_events#home', as: 'biography_home'
     post 'random', to: 'biography_events#random'
     post 'daily', to: 'biography_events#daily'
+    post 'summary', to: 'biography_events#summary'
     resources :biography_events, path: 'events'
     resources :person_tags
     resources :type_tags

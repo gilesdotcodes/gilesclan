@@ -6,6 +6,7 @@ class BiographyEvent < ActiveRecord::Base
   has_and_belongs_to_many :type_tags
 
   scope :latest_first, -> { order('start_date DESC') }
+  scope :oldest_first, -> { order('start_date ASC') }
   scope :this_month, -> { where("DATE_PART('month', start_date) = ?", Time.zone.now.month) }
   scope :on_this_day, -> { where("DATE_PART('month', start_date) = ? AND DATE_PART('day', start_date) = ?", Time.zone.now.month, Time.zone.now.day) }
   scope :by_year, ->(year) { where("DATE_PART('year', start_date) = ?", year) }
@@ -37,6 +38,12 @@ class BiographyEvent < ActiveRecord::Base
     event = BiographyEvent.on_this_day.shuffle.first
     return false if event.nil?
     Notifications.daily_biography_event_mailer(event).deliver
+  end
+
+  def self.send_daily_summary_notification
+    events = BiographyEvent.on_this_day.oldest_first
+    return false if events.empty?
+    Notifications.daily_summary_event_mailer(events).deliver
   end
 
   def types_to_s

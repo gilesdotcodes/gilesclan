@@ -1,5 +1,4 @@
 module GilesClanIds
-
   def get_giles_clan_ids(event)
     return nil if event.person_tags.empty?
     ids = []
@@ -9,5 +8,4 @@ module GilesClanIds
     end
     ids
   end
-
 end

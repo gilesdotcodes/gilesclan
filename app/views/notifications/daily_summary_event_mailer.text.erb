@@ -1,0 +1,12 @@
+<%= Date.today.strftime('%e %b').strip %>
+
+Events from this day in Giles Clan History:
+
+<% @events.each do |event| %>
+Year: <%= event.start_date.strftime("%Y (%a)") %>
+Title: <%= event.title %>
+Description: <%= event.description %>
+
+<% end %>
+
+Have a good day!

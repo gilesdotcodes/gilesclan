@@ -6,6 +6,7 @@
       <p><%= button_to('Random Notification', random_path) %></p>
       <% if BiographyEvent.on_this_day.any? %>
         <p><%= button_to('On This Day Notification', daily_path) %></p>
+        <p><%= button_to('On This Day Summary Notification', summary_path) %></p>
       <% end %>
     <% end %>
   </div>

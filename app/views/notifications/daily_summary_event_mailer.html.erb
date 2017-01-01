@@ -1,0 +1,26 @@
+<div style="margin:20px;">
+  <h1 style="color: #d9230f;"><%= Date.today.strftime('%e %b').strip %></h1>
+  <p>Events from this day in Giles Clan History:</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 80px; text-align: left;">Year</th>
+        <th style="min-width: 260px; text-align: left;">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td><%= event.start_date.strftime("%Y (%a)") %></td>
+          <td><%= link_to(event.title, biography_event_url(event.id), { target: '_blank' }) %></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 1px solid #f2f2f2;"></td>
+          <td style="border-bottom: 1px solid #f2f2f2;"><%= event.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br/>
+  <p>Have a good day!</p>
+</div>

@@ -29,4 +29,12 @@ class Notifications < ApplicationMailer
     )
   end
 
+  def daily_summary_event_mailer(events)
+    @events = events
+    mail(
+      to: User.where('id IN (?)',(1..6)).pluck(:email),
+      subject: "Giles Clan History for #{Date.today.strftime('%e %b').strip}"
+    )
+  end
+
 end

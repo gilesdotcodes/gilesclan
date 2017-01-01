@@ -86,6 +86,15 @@ class BiographyEventsController < ApplicationController
     redirect_to biography_home_path
   end
 
+  def summary
+    if BiographyEvent.send_daily_summary_notification
+      flash[:notice] = "On This Day Summary Email Sent!"
+    else
+      flash[:notice] = "There's an error!"
+    end
+    redirect_to biography_home_path
+  end
+
   private
 
   def biography_events_params
