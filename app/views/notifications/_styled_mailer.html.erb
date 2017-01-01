@@ -6,7 +6,7 @@
     <p><em><%= @event.types_to_s %></em></p>
   <% end %>
   <% if !@event.description.blank? %>
-    <p style="border: 1px solid black; padding: 15px; background-color: #f2f2f2;"><%= @event.description %></p>
+    <p style="border: 1px solid black; padding: 15px; background-color: #f2f2f2;"><%= simple_format(@event.description) %></p>
   <% else %>
     <p style="border: 1px solid black; padding: 15px; background-color: #f2f2f2;">No description added yet.</p>
   <% end %>
