@@ -1,4 +1,1 @@
-class TypeTag < ActiveRecord::Base
-
-
-end
+class TypeTag < ApplicationRecord; end

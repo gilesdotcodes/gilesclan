@@ -1,5 +1,4 @@
-class BiographyEvent < ActiveRecord::Base
-
+class BiographyEvent < ApplicationRecord
   belongs_to :user
 
   has_and_belongs_to_many :person_tags
@@ -56,5 +55,4 @@ class BiographyEvent < ActiveRecord::Base
     end
     str
   end
-
 end

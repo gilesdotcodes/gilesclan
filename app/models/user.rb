@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,5 +8,4 @@ class User < ActiveRecord::Base
   def fullname
     "#{first_name} #{last_name}"
   end
-
 end

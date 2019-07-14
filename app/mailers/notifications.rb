@@ -1,15 +1,6 @@
 require 'giles_clan_ids'
 class Notifications < ApplicationMailer
-
   include GilesClanIds
-
-  def west_ham_mailer(item, users)
-    @calendar_item = item
-    mail(
-      to: users,
-      subject: "West Ham Fixture: #{@calendar_item.name}"
-    )
-  end
 
   def random_biography_event_mailer(event)
     @event = event
@@ -36,5 +27,4 @@ class Notifications < ApplicationMailer
       subject: "Giles Clan History for #{Date.today.strftime('%e %b').strip}"
     )
   end
-
 end
