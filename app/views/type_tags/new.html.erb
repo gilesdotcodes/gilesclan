@@ -1,7 +1,13 @@
-<%= form_for TypeTag.new do |f| %>
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-3">
+  </div>
+  <div class="cell medium-6">
+    <%= form_for TypeTag.new do |f| %>
+      <%= f.label :name %> <%= f.text_field :name, autofocus: true %>
 
-  <%= f.label :name %> <%= f.text_field :name, autofocus: true %>
-
-  <%= f.submit %>
-
-<% end %>
+      <%= f.submit class: 'button primary' %>
+    <% end %>
+  </div>
+  <div class="cell medium-3">
+  </div>
+</div>

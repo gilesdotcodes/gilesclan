@@ -1,0 +1,106 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+
+ @import "foundation_and_overrides";
+ @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
+.check_box {
+  padding-right: 5px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.filters {
+  span, label {
+    display: inline-block;
+  }
+
+  span {
+    font-size: 0.875rem;
+  }
+}
+
+.title-with-links {
+  h3 {
+    display: inline-block;
+  }
+
+  h3, a {
+    margin-right: 10px;
+  }
+}
+
+.key-mum {
+  color: $giles-red;
+}
+
+.key-dad {
+  color: $giles-pink;
+}
+
+.key-other {
+  color: $giles-gray;
+}
+
+.mum {
+  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-brown 20% 100%);
+}
+
+.dad {
+  background: linear-gradient(180deg, $giles-brown 0% 20%, $giles-pink 20% 40%, $giles-brown 40% 100%);
+}
+
+.mum_dad {
+  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-pink 20% 40%, $giles-brown 40% 100%);
+}
+
+.other {
+  background: linear-gradient(180deg, $giles-brown 0% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+}
+
+.mum_dad_other {
+  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-pink 20% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+}
+
+.mum_other {
+  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-brown 20% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+}
+
+.dad_other {
+  background: linear-gradient(180deg, $giles-brown 0% 20%, $giles-pink 20% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+}
+
+.button {
+  border-color: $giles-gray;
+}
+
+h1, h2, h3, h4 {
+  color: $giles-red;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: light;
+}
+
+a {
+  color: $giles-pink;
+
+  &:hover, &:focus{
+    color: $giles-red;
+  }
+}
+
+#filters_year {
+  width: 150px;
+}

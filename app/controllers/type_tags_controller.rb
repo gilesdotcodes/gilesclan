@@ -1,12 +1,10 @@
 class TypeTagsController < ApplicationController
-
-  def new
-  end
+  def new; end
 
   def create
     @type_tag = TypeTag.new(type_tags_params)
     @type_tag.save
-    redirect_to biography_home_path
+    redirect_to biography_events_path
   end
 
   private
@@ -14,5 +12,4 @@ class TypeTagsController < ApplicationController
   def type_tags_params
     params.require(:type_tag).permit(:name)
   end
-
 end

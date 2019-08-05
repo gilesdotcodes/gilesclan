@@ -1,0 +1,35 @@
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-4">
+  </div>
+  <div class="cell medium-4">
+    <h4>Add New Date(s)</h4>
+
+    <%= form_tag :portugal_events, url: portugal_events_path do |f| %>
+      <div>
+        <%= label_tag :user_ids, 'Select People' %>
+        <%= collection_check_boxes(:portugal_events, :user_ids, User.giles_clan, :id, :fullname) do |b| %>
+          <%= b.label(class: 'check_box') { b.check_box(class: 'check_box') + b.text} %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= label_tag :start_date, 'Arrival Date' %>
+        <%= date_field_tag :start_date, required: true %>
+      </div>
+
+      <div>
+        <%= label_tag :end_date, 'Departure Date' %>
+        <%= date_field_tag :end_date, required: true %>
+      </div>
+
+      <div>
+        <%= submit_tag('Add', class: 'button primary') %>
+      </div>
+    <% end %>
+  </div>
+  <div class="cell medium-4">
+  </div>
+</div>
+
+
+

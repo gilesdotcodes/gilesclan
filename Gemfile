@@ -42,6 +42,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'figaro'
 gem 'devise'
 gem 'puma', '~> 3.11'
+gem 'foundation-rails'
+gem 'autoprefixer-rails'
+gem 'pagy'
 
 group :development do
   gem 'letter_opener', '~> 1.4.1'

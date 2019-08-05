@@ -1,10 +1,12 @@
-<% flash.each do |type, msg| %>
-  <div class="alert alert-<%= type %>">
-    <a href="#" data-dismiss="alert" class="close">&times;</a>
-      <ul>
-        <li>
-          <%= msg %>
-        </li>
-      </ul>
-  </div>
-<% end %>
+<div class="cell shrink">
+  <% flash.each do |type, msg| %>
+    <% klass = type == 'notice' ? 'success' : type %>
+    <div class="callout <%= klass %>" data-closable>
+      <%# <a href="#" data-dismiss="alert" class="close">&times;</a> %>
+      <%= msg %>
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+</div>

@@ -1,5 +1,7 @@
-<% unless user_signed_in? %>
-  <%= render 'base/welcome' %>
-<% else %>
-  <%= render 'base/giles_welcome' %>
+<h1>Welcome to Giles Clan!</h1>
+<p><%= link_to('Add Event to Biography', new_biography_event_path, class: 'button primary') %></p>
+<br/>
+<h2>Events from this month:</h2>
+<% @events.each do |event| %>
+  <p><%= event.date_output %> - <%= link_to(event.title, biography_event_path(event.id))%></p>
 <% end %>

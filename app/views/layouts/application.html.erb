@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Giles Clan App</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= content_for?(:title) ? yield(:title) : 'Giles Clan' %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %><%# I've put this back in %>
   </head>
+
   <body>
-    <div class="container-fluid">
-      <%= render 'layouts/nav' %>
-      <%= render 'layouts/flash_messages' %>
-      <%= yield %>
+    <div class="grid-y grid-padding-y grid-container">
+      <% if user_signed_in? %>
+        <%= render 'layouts/nav' %>
+      <% end %>
+      <div class="cell medium-cell-block-container">
+        <%= render 'layouts/flash_messages' if flash.any? %>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

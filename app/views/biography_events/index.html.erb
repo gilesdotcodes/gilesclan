@@ -1,71 +1,64 @@
-<div class="row">
-  <div class="col-md-12">
-    <h4>Select Filters</h4>
-    <p><em>Uncheck all options to see all Events.</em></p>
+<div class="grid-x grid-padding-x">
+  <div class="cell small-8">
+    <h4>Search</h4>
+  </div>
+  <div class="cell small-4">
+    <%= link_to('Add Event', new_biography_event_path, class: "button primary float-right") %>
+    <%= link_to('RANDOM', random_path, class: "button primary float-right", method: :post) %>
   </div>
 </div>
-<div class="row">
-  <%= form_tag({ url: biography_events_path}, { method: :get }) do %>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= label_tag :person_tags %><br/>
+<%= form_tag({ url: biography_events_path}, { method: :get }) do %>
+  <div class="grid-x grid-padding-x filters">
+    <div class="cell medium-4">
+      <div>
+        <%= label_tag :person_tags, 'Select People' %> <span><%= link_to('Add', new_person_tag_path) %></span><br/>
         <%= collection_check_boxes(:filters, :person_tag_ids, PersonTag.all, :id, :name) do |b| %>
           <%= b.label(class: "check_box") { b.check_box(class: "check_box") + b.text} %>
         <% end %>
       </div>
-      <div class="form-group">
-        <%= submit_tag 'Search' %>
-      </div>
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= label_tag :type_tags %><br/>
+    <div class="cell medium-4">
+      <div>
+        <%= label_tag :type_tags, 'Select Type(s)' %> <span><%= link_to('Add', new_type_tag_path) %></span><br/>
         <%= collection_check_boxes(:filters, :type_tag_ids, TypeTag.all, :id, :name) do |b| %>
           <%= b.label(class: "check_box") { b.check_box(class: "check_box") + b.text} %>
         <% end %>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= label_tag :years %><br/>
+    <div class="cell medium-4">
+      <div>
+        <%= label_tag :years, 'Select Year' %><br/>
         <%= collection_select(:filters, :year, BiographyEvent.years, :to_i, :to_s, { include_blank: true }) %>
       </div>
     </div>
-  <% end %>
-</div>
-<div class="row">
-  <div class="col-md-1">
   </div>
-  <div class="col-md-10">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <% if @tags.any? %>
-          <h4>Events tagged with:
-          <% @tags.each_with_index do |tag, i| %>
-            <%= "[#{tag}]" %>
-            <%= "&" unless i+1 == @tags.count %>
-          <% end %>
-          <%= link_to('Add Event', new_biography_event_path, class: "pull-right") %>
-          </h4>
-        <% else %>
-          <h4>All Events <%= link_to('Add Event', new_biography_event_path, class: "pull-right") %></h4>
-        <% end %>
-      </div>
-      <div class="panel-body">
-        <% if @biography_events.any? %>
-          <ul>
-            <% @biography_events.each do |event| %>
-              <ul>
-                <li><%= event.date_output %> - <%= link_to("#{event.title}", biography_event_path(event.id))%></li>
-              </ul>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>No Events match your search criteria.</p>
-        <% end %>
-      </div>
+  <div class="grid-x grid-padding-x">
+    <div class="cell medium-10">
+      <%= submit_tag('Search', class: 'button primary') %>
+      <%= link_to('Clear Filters', biography_events_path, class: 'button primary') %>
+    </div>
+    <div class="cell medium-2">
     </div>
   </div>
-  <div class="col-md-1">
+<% end %>
+
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-12">
+    <% if @tags %>
+      <h4>Events tagged with: <em><%= @tags.join(', ') %></em></h4>
+    <% else %>
+      <h4>Recently added</h4>
+    <% end %>
+    <div>
+      <% if @biography_events.any? %>
+        <% @biography_events.each do |event| %>
+          <p><%= event.date_output %> - <%= link_to("#{event.title}", biography_event_path(event.id))%></p>
+        <% end %>
+        <%== pagy_foundation_combo_nav_js(@pagy) %>
+      <% else %>
+        <p>No Events match your search criteria.</p>
+      <% end %>
+    </div>
+    </div>
   </div>
 </div>

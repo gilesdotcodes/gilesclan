@@ -14,7 +14,7 @@
               <%= f.label :email %>
               <%= f.email_field :email, autofocus: true, class: "form-control" %>
             </div>
-            <%= f.submit t('.resend_unlock_instructions', :default => "Resend unlock instructions"), class: "btn btn-primary"%>
+            <%= f.submit t('.resend_unlock_instructions', :default => "Resend unlock instructions"), class: "button primary"%>
           <% end %>
           <br/>
           <%= render "devise/shared/links" %>

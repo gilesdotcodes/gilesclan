@@ -30,8 +30,3 @@ user = User.find_or_create_by(email: "carolanngiles@me.com")
 user.password = '12345678'
 user.password_confirmation = '12345678'
 user.save!
-
-user = User.find_or_create_by(email: "faye.cooper@hanover.org.uk")
-user.password = '12345678'
-user.password_confirmation = '12345678'
-user.save!

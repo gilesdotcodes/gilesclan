@@ -1,29 +1,15 @@
-require 'giles_clan_ids'
-
 class BiographyEventsController < ApplicationController
-
   include GilesClanIds
+  include Pagy::Backend
 
   before_action :fetch_event, only: [:show, :edit, :update, :destroy]
-  before_action :get_referrer, only: [:new, :show]
-
-  def home
-    @all = params[:all].to_i == 1 ? true : false
-    if @all
-      @events_this_month = BiographyEvent.this_month.latest_first
-    else
-      @events_this_month = BiographyEvent.this_month.shuffle.take(5).sort_by(&:start_date).reverse
-    end
-  end
 
   def index
-    check_params(params)
-    search_params(@params)
-    tags_params(@params)
+    @pagy, @biography_events = pagy(biography_events)
   end
 
   def show
-    @giles_clan_ids = get_giles_clan_ids(@biography_event)
+    @giles_clan_ids = User.linked_giles_clan(@biography_event.person_tags.pluck(:name)).pluck(:id)
   end
 
   def new
@@ -34,24 +20,19 @@ class BiographyEventsController < ApplicationController
     @biography_event = BiographyEvent.new(biography_events_params)
     @biography_event.user = current_user
     if @biography_event.save
-      flash[:notice] = "Event successfully saved!"
-      if session[:come_from] == 'index'
-        redirect_to biography_events_path
-      else
-        redirect_to biography_home_path
-      end
+      flash[:notice] = 'Event successfully saved!'
+      redirect_to biography_event_path(@biography_event)
     else
       flash[:notice] = "There's an error!"
       render action: :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @biography_event.update(biography_events_params)
-      flash[:notice] = "Event successfully edited and saved!"
+      flash[:notice] = 'Event successfully edited and saved!'
       redirect_to biography_event_path(@biography_event)
     else
       flash[:notice] = "There's an error!"
@@ -61,11 +42,11 @@ class BiographyEventsController < ApplicationController
 
   def destroy
     if @biography_event.destroy
-      flash[:notice] = "Event successfully deleted!"
+      flash[:notice] = 'Event successfully deleted!'
     else
-      flash[:notice] = "There's an error!"
+      flash[:error] = "There's an error!"
     end
-    redirect_to biography_home_path
+    redirect_to biography_events_path
   end
 
   def random
@@ -74,7 +55,7 @@ class BiographyEventsController < ApplicationController
     else
       flash[:notice] = "There's an error!"
     end
-    redirect_to biography_home_path
+    redirect_to biography_events_path
   end
 
   def daily
@@ -83,7 +64,7 @@ class BiographyEventsController < ApplicationController
     else
       flash[:notice] = "There's an error!"
     end
-    redirect_to biography_home_path
+    redirect_to biography_events_path
   end
 
   def summary
@@ -92,7 +73,7 @@ class BiographyEventsController < ApplicationController
     else
       flash[:notice] = "There's an error!"
     end
-    redirect_to biography_home_path
+    redirect_to biography_events_path
   end
 
   private
@@ -108,40 +89,33 @@ class BiographyEventsController < ApplicationController
     @biography_event = BiographyEvent.find(params[:id])
   end
 
-  def check_params(params)
-    @params = params[:filters].present? ? params[:filters] : params
-    @params[:type_tag_ids].reject!(&:blank?) if @params[:type_tag_ids].present?
-    @params[:person_tag_ids].reject!(&:blank?) if @params[:person_tag_ids].present?
+  def filter_params
+    return false unless params[:filters]
+    @filter_params ||=  {}.tap do |hsh|
+                          hsh[:type_ids] = params[:filters][:type_tag_ids].reject(&:blank?)
+                          hsh[:person_ids] = params[:filters][:person_tag_ids].reject(&:blank?)
+                          hsh[:year] = params[:filters][:year]
+                        end
   end
 
-  def search_params(params)
-    scope = BiographyEvent.all.latest_first
-    new_scope = scope
-    if params[:type_tag_ids].present?
-      params[:type_tag_ids].each do |id|
-        new_scope = new_scope & scope.by_type(id.to_i)
-      end
+  def set_filter_tags
+    @tags ||= [].tap do |arr|
+                filter_params[:type_ids].each{ |id| arr << TypeTag.find(id).name }
+                filter_params[:person_ids].each{ |id| arr << PersonTag.find(id).name }
+                arr << filter_params[:year] if filter_params[:year].present?
+                arr << 'No filters selected' if arr.empty?
+              end
+  end
+
+  def biography_events
+    if filter_params
+      set_filter_tags
+      BiographyEvent.latest_first
+        .then { |events| filter_params[:type_ids].any? ? events.by_type(filter_params[:type_ids]) : events }
+        .then { |events| filter_params[:person_ids].any? ? events.by_person(filter_params[:person_ids]) : events }
+        .then { |events| filter_params[:year].present? ? events.by_year(filter_params[:year]) : events }
+    else
+      BiographyEvent.order(created_at: :desc).limit(100)
     end
-    if params[:person_tag_ids].present?
-      params[:person_tag_ids].each do |id|
-        new_scope = new_scope & scope.by_person(id.to_i)
-      end
-    end
-    if params[:year].present?
-      new_scope = new_scope & scope.by_year(params[:year].to_i)
-    end
-    @biography_events = new_scope.uniq
   end
-
-  def tags_params(params)
-    @tags = []
-    params[:type_tag_ids].each{ |t| @tags << TypeTag.find(t.to_i).name } if params[:type_tag_ids].present?
-    params[:person_tag_ids].each{ |t| @tags << PersonTag.find(t.to_i).name } if params[:person_tag_ids].present?
-    @tags << params[:year] if params[:year].present?
-  end
-
-  def get_referrer
-    session[:come_from] = Rails.application.routes.recognize_path(request.referrer)[:action]
-  end
-
 end

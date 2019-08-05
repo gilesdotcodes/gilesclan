@@ -9,8 +9,8 @@ class BiographyEvent < ApplicationRecord
   scope :this_month, -> { where("DATE_PART('month', start_date) = ?", Time.zone.now.month) }
   scope :on_this_day, -> { where("DATE_PART('month', start_date) = ? AND DATE_PART('day', start_date) = ?", Time.zone.now.month, Time.zone.now.day) }
   scope :by_year, ->(year) { where("DATE_PART('year', start_date) = ?", year) }
-  scope :by_type, ->(id) { joins(:type_tags).where('type_tags.id = ?', id) }
-  scope :by_person, ->(id) { joins(:person_tags).where('person_tags.id = ?', id) }
+  scope :by_type, ->(ids) { joins(:type_tags).where('type_tags.id IN (?)', ids) }
+  scope :by_person, ->(ids) { joins(:person_tags).where('person_tags.id IN (?)', ids) }
 
   validates :start_date, :title, presence: true
 
