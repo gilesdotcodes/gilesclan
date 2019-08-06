@@ -1,4 +1,4 @@
-class CreateCalendarItems < ActiveRecord::Migration
+class CreateCalendarItems < ActiveRecord::Migration[5.2]
   def change
     create_table :calendar_items do |t|
 

@@ -1,4 +1,4 @@
-class CreateBiographyEventsPersonTags < ActiveRecord::Migration
+class CreateBiographyEventsPersonTags < ActiveRecord::Migration[5.2]
   def change
     create_table :biography_events_person_tags do |t|
       t.integer :biography_event_id

@@ -1,4 +1,4 @@
-class AddBiographyEvents < ActiveRecord::Migration
+class AddBiographyEvents < ActiveRecord::Migration[5.2]
   def change
     create_table :biography_events do |t|
 
