@@ -4,7 +4,9 @@
   </div>
   <div class="cell small-4">
     <%= link_to('Add Event', new_biography_event_path, class: "button primary float-right") %>
-    <%= link_to('summary', summary_path, class: "button primary float-right", method: :post) %>
+    <% unless ENV['PROD_SUMMARY_EMAIL'] == '1' %>
+      <%= link_to('Summary Test', summary_path, class: "button primary float-right", method: :post) %>
+    <% end %>
   </div>
 </div>
 <%= form_tag({ url: biography_events_path}, { method: :get }) do %>
