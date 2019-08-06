@@ -1,11 +1,11 @@
 <div style="margin:20px;">
-  <h1 style="color: #d9230f;"><%= Date.today.strftime('%e %b').strip %></h1>
+  <h1><%= Date.today.strftime('%e %b').strip %></h1>
   <p>Events from this day in Giles Clan History:</p>
   <table>
     <thead>
       <tr>
-        <th style="width: 80px; text-align: left;">Year</th>
-        <th style="min-width: 260px; text-align: left;">Title</th>
+        <th style="width: 100px; text-align: left;">Year</th>
+        <th style="min-width: 280px; text-align: left;">Title</th>
       </tr>
     </thead>
     <tbody>
@@ -15,8 +15,19 @@
           <td><%= link_to(event.title, biography_event_url(event.id), { target: '_blank' }) %></td>
         </tr>
         <tr>
-          <td style="border-bottom: 1px solid #f2f2f2;"></td>
-          <td style="border-bottom: 1px solid #f2f2f2;"><%= simple_format(event.description) %></td>
+          <td></td>
+          <td><%= simple_format(event.description) %></td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 20px;"></td>
+          <td style="padding-bottom: 20px;">
+            <% giles_clan_ids = User.linked_giles_clan(event.person_tags.pluck(:name)).pluck(:id) %>
+            <% if giles_clan_ids %>
+              <% giles_clan_ids.each do |id| %>
+                <%= image_tag "avatar_#{id}.png", style: 'width: 40px; border-radius: 50%;' %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

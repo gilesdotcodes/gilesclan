@@ -1,18 +1,21 @@
 <%= devise_error_messages! %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><%= t('.resend_confirmation_instructions', :default => 'Resend confirmation instructions') %></h4>
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-4">
   </div>
-  <div class="panel-body">
+  <div class="cell medium-4">
+    <h4><%= t('.resend_confirmation_instructions', :default => 'Resend confirmation instructions') %></h4>
     <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, role: "form" }) do |f| %>
-      <div class="form-group">
+      <div>
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, class: "form-control"  %>
       </div>
 
       <%= f.submit t('.resend_confirmation_instructions', :default => 'Resend confirmation instructions'), class: "button primary" %>
     <% end %>
+    <br />
+    <%= render 'devise/shared/links' %>
+  </div>
+  <div class="cell medium-4">
   </div>
 </div>
 
-<%= render "devise/shared/links" %>

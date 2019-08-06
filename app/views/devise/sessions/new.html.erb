@@ -1,7 +1,7 @@
 <div class="grid-x grid-padding-x">
-    <div class="cell medium-3">
+    <div class="cell medium-4">
     </div>
-    <div class="cell medium-6">
+    <div class="cell medium-4">
       <h4><%= t('.sign_in', default: 'Sign in to Giles Clan') %></h4>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f| %>
         <div>
@@ -24,6 +24,6 @@
       <% end %>
       <%= render 'devise/shared/links' %>
     </div>
-    <div class="cell medium-3">
+    <div class="cell medium-4">
     </div>
 </div>

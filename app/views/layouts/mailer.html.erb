@@ -1,27 +1,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<head>
-  <title>Giles Clan App</title>
-</head>
-<body>
-<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
-  <tr>
-    <td>
-      <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-          <td>
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-              <tr>
-                <td valign="top" style="border-bottom: 1px solid #dddddd; color: ; padding: 30px 0 30px;">
-                  <%= yield %>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-</body>
+  <head>
+    <title>Giles Clan App</title>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+      html {
+        background-color: #eae7dc;
+      }
+      h1, h2, h3, h4, th {
+        color: #e85a4f;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-weight: light;
+      }
+      p, td {
+        font-family: Roboto, Arial, sans-serif;
+        color: #8e8d8a;
+      }
+      a {
+        font-family: Roboto, Arial, sans-serif;
+        color: #e98074;
+      }
+    </style>
+  </head>
+  <body>
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+      <tr>
+        <td>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                  <tr>
+                    <td valign="top" style="border-bottom: 1px solid #dddddd; color: ; padding: 30px 0 30px;">
+                      <%= yield %>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

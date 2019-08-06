@@ -1,5 +1,4 @@
 class BiographyEventsController < ApplicationController
-  include GilesClanIds
   include Pagy::Backend
 
   before_action :fetch_event, only: [:show, :edit, :update, :destroy]
@@ -69,7 +68,7 @@ class BiographyEventsController < ApplicationController
 
   def summary
     if BiographyEvent.send_daily_summary_notification
-      flash[:notice] = "On This Day Summary Email Sent!"
+      flash[:notice] = 'On This Day Summary Email Sent!'
     else
       flash[:notice] = "There's an error!"
     end

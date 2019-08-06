@@ -1,27 +1,21 @@
 <%= devise_error_messages! %>
-<div class="row">
-  <div class="panel-body">
-    <div class="panel-info col-md-1">
-    </div>
-    <div class="panel-info col-md-10">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4><%= t('.resend_unlock_instructions', :default => "Resend unlock instructions") %></h4>
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-4">
+  </div>
+  <div class="cell medium-4">
+    <h4><%= t('.resend_unlock_instructions', :default => "Resend unlock instructions") %></h4>
+    <div>
+      <%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post, html: { role: "form" } }) do |f| %>
+        <div>
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, class: "form-control" %>
         </div>
-        <div class="panel-body">
-          <%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post, html: { role: "form" } }) do |f| %>
-            <div class="form-group">
-              <%= f.label :email %>
-              <%= f.email_field :email, autofocus: true, class: "form-control" %>
-            </div>
-            <%= f.submit t('.resend_unlock_instructions', :default => "Resend unlock instructions"), class: "button primary"%>
-          <% end %>
-          <br/>
-          <%= render "devise/shared/links" %>
-        </div>
-      </div>
+        <%= f.submit t('.resend_unlock_instructions', :default => "Resend unlock instructions"), class: "button primary"%>
+      <% end %>
+      <br/>
+      <%= render 'devise/shared/links' %>
     </div>
-     <div class="panel-info col-md-1">
-    </div>
+  </div>
+  <div class="cell medium-4">
   </div>
 </div>

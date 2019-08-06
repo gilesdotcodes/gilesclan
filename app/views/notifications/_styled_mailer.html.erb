@@ -1,11 +1,11 @@
 <div style="margin:20px;">
-  <h1 style="color: #d9230f;"><%= @event.title %></h1>
+  <h1><%= @event.title %></h1>
   <p><%= l @event.start_date.to_date %></p>
   <p><%= @event.location %></p>
   <% if @event.type_tags.any? %>
     <p><em><%= @event.types_to_s %></em></p>
   <% end %>
-  <% if !@event.description.blank? %>
+  <% if @event.description %>
     <p style="border: 1px solid black; padding: 15px; background-color: #f2f2f2;"><%= simple_format(@event.description) %></p>
   <% else %>
     <p style="border: 1px solid black; padding: 15px; background-color: #f2f2f2;">No description added yet.</p>
