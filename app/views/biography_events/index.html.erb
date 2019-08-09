@@ -53,6 +53,7 @@
     <% end %>
     <div>
       <% if @biography_events.any? %>
+        <%== pagy_foundation_combo_nav_js(@pagy) %>
         <% @biography_events.each do |event| %>
           <p><%= event.date_output %> - <%= link_to("#{event.title}", biography_event_path(event.id))%></p>
         <% end %>

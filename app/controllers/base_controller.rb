@@ -1,5 +1,7 @@
 class BaseController < ApplicationController
+  include Pagy::Backend
+
   def index
-    @events = BiographyEvent.this_month.latest_first
+    @pagy, @biography_events = pagy(BiographyEvent.this_month.latest_first)
   end
 end

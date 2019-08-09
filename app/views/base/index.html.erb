@@ -4,8 +4,10 @@
     <p><%= link_to('Add Event to Biography', new_biography_event_path, class: 'button primary') %></p>
     <br/>
     <h2>Events from this month:</h2>
-    <% @events.each do |event| %>
+    <%== pagy_foundation_combo_nav_js(@pagy) %>
+    <% @biography_events.each do |event| %>
       <p><%= event.date_output %> - <%= link_to(event.title, biography_event_path(event.id))%></p>
     <% end %>
+    <%== pagy_foundation_combo_nav_js(@pagy) %>
   </div>
 </div>
