@@ -4,7 +4,7 @@ class BiographyEventsController < ApplicationController
   before_action :fetch_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pagy, @biography_events = pagy(biography_events)
+    @pagy, @biography_events = pagy(biography_events, items: 100)
   end
 
   def show

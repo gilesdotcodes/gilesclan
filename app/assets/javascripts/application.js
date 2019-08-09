@@ -15,10 +15,13 @@
 //= require turbolinks
 //= require jquery
 //= require foundation
+//= require pagy
 //= require_tree .
 
 // $(function(){ $(document).foundation(); });
 
 $(document).on('turbolinks:load', function() {
   $(function(){ $(document).foundation(); });
+
+  window.addEventListener("turbolinks:load", Pagy.init);
 });

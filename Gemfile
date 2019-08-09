@@ -43,7 +43,8 @@ gem 'devise'
 gem 'puma', '~> 3.11'
 gem 'foundation-rails'
 gem 'autoprefixer-rails'
-gem 'pagy'
+gem 'pagy', '~> 3.4'
+gem 'oj'
 
 group :development do
   gem 'letter_opener', '~> 1.4.1'

@@ -43,6 +43,7 @@
 # Foundation extra: Add nav, nav_js and combo_nav_js helpers and templates for Foundation pagination
 # See https://ddnexus.github.io/pagy/extras/foundation
 require 'pagy/extras/foundation'
+Rails.application.config.assets.paths << Pagy.root.join('javascripts')
 
 # Materialize extra: Add nav, nav_js and combo_nav_js helpers for Materialize pagination
 # See https://ddnexus.github.io/pagy/extras/materialize
