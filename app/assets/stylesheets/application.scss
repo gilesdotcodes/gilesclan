@@ -56,31 +56,31 @@
 }
 
 .mum {
-  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-brown 20% 100%);
+  background: linear-gradient(180deg, $giles-red 0% 33.3%, $giles-brown 33.3% 100%);
 }
 
 .dad {
-  background: linear-gradient(180deg, $giles-brown 0% 20%, $giles-pink 20% 40%, $giles-brown 40% 100%);
+  background: linear-gradient(180deg, $giles-brown 0% 33.3%, $giles-pink 33.3% 66.6%, $giles-brown 66.6% 100%);
 }
 
 .mum_dad {
-  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-pink 20% 40%, $giles-brown 40% 100%);
+  background: linear-gradient(180deg, $giles-red 0% 33.3%, $giles-pink 33.3% 66.6%, $giles-brown 66.6% 100%);
 }
 
 .other {
-  background: linear-gradient(180deg, $giles-brown 0% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+  background: linear-gradient(180deg, $giles-brown 0% 66.6%, $giles-gray 66.6% 100%);
 }
 
 .mum_dad_other {
-  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-pink 20% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+  background: linear-gradient(180deg, $giles-red 0% 33.3%, $giles-pink 33.3% 66.6%, $giles-gray 66.6% 100%);
 }
 
 .mum_other {
-  background: linear-gradient(180deg, $giles-red 0% 20%, $giles-brown 20% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+  background: linear-gradient(180deg, $giles-red 0% 33.3%, $giles-brown 33.3% 66.6%, $giles-gray 66.6% 100%);
 }
 
 .dad_other {
-  background: linear-gradient(180deg, $giles-brown 0% 20%, $giles-pink 20% 40%, $giles-gray 40% 60%, $giles-brown 60% 100%);
+  background: linear-gradient(180deg, $giles-brown 0% 33.3%, $giles-pink 33.3% 66.6%, $giles-gray 66.6% 100%);
 }
 
 .button {
@@ -103,4 +103,10 @@ a {
 
 #filters_year {
   width: 150px;
+}
+
+.calendar-month {
+  a {
+    color: $giles-gray;
+  }
 }

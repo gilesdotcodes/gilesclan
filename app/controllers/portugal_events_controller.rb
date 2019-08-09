@@ -16,25 +16,19 @@ class PortugalEventsController < ApplicationController
     redirect_to action: :index
   end
 
-  def edit; end
-
-  def update
-    # if @biography_event.update(portugal_events_params)
-    #   flash[:notice] = 'Event successfully edited and saved!'
-    #   redirect_to biography_event_path(@biography_event)
-    # else
-    #   flash[:notice] = "There's an error!"
-    #   render action: :edit
-    # end
+  def view_date
+    @events = PortugalEvent.where(user_id: params[:user_ids]).where(event_date: params[:event_date]).order(:user_id)
+    @date = @events.first.event_date
   end
 
   def destroy
-    # if @biography_event.destroy
-    #   flash[:notice] = 'Event successfully deleted!'
-    # else
-    #   flash[:notice] = "There's an error!"
-    # end
-    # redirect_to biography_events_path
+    event = PortugalEvent.find(params[:id])
+    if event.destroy
+      flash[:notice] = 'Successfully deleted!'
+    else
+      flash[:notice] = "There's an error!"
+    end
+    redirect_to action: :index
   end
 
   private

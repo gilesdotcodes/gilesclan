@@ -1,0 +1,16 @@
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-4">
+  </div>
+  <div class="cell medium-4 title-with-links">
+    <h3><%= @date.to_formatted_s(:rfc822) %></h3><%= link_to('Back to calendar', portugal_events_path) %>
+    <p>Booked by:</p>
+    <% @events.each do |event| %>
+      <p><%= event.user.fullname %> | <%= link_to('Delete', portugal_event_path(event), method: :delete, data: {confirm: 'Are you sure?'}) %></p>
+    <% end %>
+  </div>
+  <div class="cell medium-4">
+  </div>
+</div>
+
+
+
