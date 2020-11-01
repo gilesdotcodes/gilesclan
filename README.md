@@ -1,5 +1,10 @@
 # README
 
+## Versions
+Rails: 5.2.4.4
+
+Ruby: 2.7.2
+
 ## Apps
 Staging: [free heroku domain](https://ancient-river-41999.herokuapp.com)
 
