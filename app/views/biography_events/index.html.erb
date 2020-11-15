@@ -55,7 +55,12 @@
 <div class="grid-x grid-padding-x">
   <div class="cell medium-12">
     <% if @tags %>
-      <h4>Events tagged with: <em><%= @tags.join(', ') %></em></h4>
+      <h4>
+        Events tagged with: <em><%= @tags.join(', ') %></em>
+        <% if @filter_params[:string].present? %>
+          and by keyword: <em><%= @filter_params[:string] %></em>
+        <% end %>
+      </h4>
     <% else %>
       <h4>Recently added</h4>
     <% end %>
