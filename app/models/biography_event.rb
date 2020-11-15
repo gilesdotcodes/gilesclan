@@ -11,6 +11,7 @@ class BiographyEvent < ApplicationRecord
   scope :by_year, ->(year) { where("DATE_PART('year', start_date) = ?", year) }
   scope :by_type, ->(ids) { joins(:type_tags).where('type_tags.id IN (?)', ids) }
   scope :by_person, ->(ids) { joins(:person_tags).where('person_tags.id IN (?)', ids) }
+  scope :search_by, ->(string) { where("title ILIKE ? OR description ILIKE ?", "%#{string}%", "%#{string}%") }
 
   validates :start_date, :title, presence: true
 
