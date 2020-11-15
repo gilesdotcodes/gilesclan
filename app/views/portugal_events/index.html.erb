@@ -1,6 +1,6 @@
 <div class="grid-x grid-padding-x">
   <div class="cell medium-4 title-with-links">
-    <% [2019, 2020, 2021].each do |year| %>
+    <% [2019, 2020, 2021, 2022].each do |year| %>
       <% if year == @year %>
         <h3><%= @year %></h3>
       <% else %>
@@ -39,7 +39,7 @@
               <tr>
                 <% [1,2,3,4,5,6,0].each do |cell_number| %>
                   <% current_number += 1 if current_number > 0 || cell_number == start_number %>
-                  <% html_class, user_ids, date = get_portugal_date_variables(@year, month, current_number) %>
+                  <% html_class, user_ids, date = get_portugal_date_variables(@year, month, current_number, @events) %>
                   <td class=<%= html_class %>>
                     <% day = current_number > 0 && current_number <= end_number ? current_number : '' %>
                     <%= link_to_if(user_ids, day, view_date_portugal_events_path(user_ids: user_ids, event_date: date))%>

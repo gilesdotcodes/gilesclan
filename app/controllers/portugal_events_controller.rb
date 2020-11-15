@@ -1,6 +1,9 @@
 class PortugalEventsController < ApplicationController
   def index
-    @year = params[:year] ? params[:year].to_i : 2019
+    @year = params[:year] ? params[:year].to_i : Time.now.year
+    start_date = "#{@year}-01-01"
+    end_date = "#{@year}-12-31"
+    @events = PortugalEvent.where(event_date: (start_date..end_date)).group_by(&:event_date)
   end
 
   def new; end

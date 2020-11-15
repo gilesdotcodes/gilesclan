@@ -89,11 +89,13 @@ class BiographyEventsController < ApplicationController
   end
 
   def filter_params
-    return false unless params[:filters]
     @filter_params ||=  {}.tap do |hsh|
-                          hsh[:type_ids] = params[:filters][:type_tag_ids].reject(&:blank?)
-                          hsh[:person_ids] = params[:filters][:person_tag_ids].reject(&:blank?)
-                          hsh[:year] = params[:filters][:year]
+                          if params[:filters]
+                            hsh[:type_ids] = params[:filters][:type_tag_ids].reject(&:blank?)
+                            hsh[:person_ids] = params[:filters][:person_tag_ids].reject(&:blank?)
+                            hsh[:year] = params[:filters][:year]
+                            hsh[:string] = params[:filters][:string]
+                          end
                         end
   end
 
@@ -107,12 +109,13 @@ class BiographyEventsController < ApplicationController
   end
 
   def biography_events
-    if filter_params
+    if filter_params.any?
       set_filter_tags
       BiographyEvent.latest_first
         .then { |events| filter_params[:type_ids].any? ? events.by_type(filter_params[:type_ids]) : events }
         .then { |events| filter_params[:person_ids].any? ? events.by_person(filter_params[:person_ids]) : events }
         .then { |events| filter_params[:year].present? ? events.by_year(filter_params[:year]) : events }
+        .then { |events| filter_params[:string].present? ? events.search_by(filter_params[:string]) : events }
     else
       BiographyEvent.order(created_at: :desc).limit(100)
     end
