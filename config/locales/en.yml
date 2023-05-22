@@ -39,7 +39,7 @@ en:
         birthday: "Birthday"
         other: "Other"
   mailer:
-    default_email_from: "no-reply@gilesclan.me.uk"
+    default_email_from: "s.giles@hotmail.co.uk"
   date:
     formats:
       default: "%a %e %b %Y"
