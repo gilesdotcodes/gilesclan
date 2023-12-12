@@ -22,7 +22,7 @@ class Notifications < ApplicationMailer
     emails = if ENV['PROD_SUMMARY_EMAIL'] == '1'
                User.where('id IN (?)',(1..5)).pluck(:email)
              else
-               ['s.giles@hotmail.co.uk']
+               ['s.giles@hotmail.co.uk', 'stephengiles.uk@gmail.com']
              end
     mail(
       to: emails,
