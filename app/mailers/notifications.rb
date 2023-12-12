@@ -20,7 +20,7 @@ class Notifications < ApplicationMailer
   def daily_summary_event_mailer(events)
     @events = events
     emails = if ENV['PROD_SUMMARY_EMAIL'] == '1'
-               User.where('id IN (?)',(1..5)).pluck(:email)
+               User.giles_clan_email.pluck(:email)
              else
                ['s.giles@hotmail.co.uk', 'stephengiles.uk@gmail.com']
              end

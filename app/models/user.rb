@@ -12,10 +12,14 @@ class User < ApplicationRecord
     4 => 'Adrian',
     5 => 'Carol',
     7 => 'James',
-    8 => 'Arthur'
+    8 => 'Arthur',
+    9 => 'Lucy'
   }
 
+  GILES_EMAIL_IDS = [1, 2, 3, 4, 5, 9]
+
   scope :giles_clan, ->{ where(id: GILES_CLAN_IDS.keys) }
+  scope :giles_clan_email, ->{ where(id: GILES_EMAIL_IDS) }
   scope :linked_giles_clan, ->(first_names) { where(first_name: first_names) }
 
   def fullname
