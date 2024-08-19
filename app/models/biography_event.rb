@@ -56,4 +56,8 @@ class BiographyEvent < ApplicationRecord
     end
     str
   end
+
+  def as_json(options)
+    super(methods: [:person_tags, :type_tags, :user])
+  end
 end

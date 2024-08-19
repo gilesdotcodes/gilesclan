@@ -21,5 +21,9 @@ Rails.application.routes.draw do
   post 'daily', to: 'biography_events#daily'
   post 'summary', to: 'biography_events#summary'
 
+  namespace :api do
+    resources :events, only: [:index, :show]
+  end
+
   root 'base#index'
 end
